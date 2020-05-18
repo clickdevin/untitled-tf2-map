@@ -1,0 +1,293 @@
+versioninfo
+{
+	"editorversion" "400"
+	"editorbuild" "7937"
+	"mapversion" "33"
+	"formatversion" "100"
+	"prefab" "0"
+}
+visgroups
+{
+}
+viewsettings
+{
+	"bSnapToGrid" "1"
+	"bShowGrid" "1"
+	"bShowLogicalGrid" "0"
+	"nGridSpacing" "16"
+	"bShow3DGrid" "0"
+}
+world
+{
+	"id" "1"
+	"mapversion" "33"
+	"classname" "worldspawn"
+	"detailmaterial" "detail/detailsprites"
+	"detailvbsp" "detail.vbsp"
+	"maxpropscreenwidth" "-1"
+	"skyname" "sky_day01_01"
+}
+entity
+{
+	"id" "2"
+	"classname" "logic_relay"
+	"spawnflags" "0"
+	"targetname" "sym_ad_add_time"
+	connections
+	{
+		"OnTrigger" "sym_ad_timer,AddTime,$CaptureTime,0,-1"
+		"OnTrigger" "sym_ad_cancel_overtime_outcome,Compare,,0,-1"
+		"OnTrigger" "sym_ad_time_set_in_interval,SetValue,1,0,-1"
+	}
+	"origin" "0 32 -32"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "4"
+	"classname" "math_counter"
+	"targetname" "sym_ad_outcome_counter"
+	connections
+	{
+		"OutValue" "sym_ad_outcome,InValue,,0,-1"
+		"OutValue" "sym_ad_cancel_overtime_outcome,SetValue,,0,-1"
+	}
+	"origin" "0 -32 -16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "6"
+	"classname" "logic_case"
+	"Case01" "20000"
+	"Case02" "20220"
+	"Case03" "20200"
+	"Case04" "11200"
+	"Case05" "20020"
+	"Case06" "10021"
+	"targetname" "sym_ad_outcome"
+	connections
+	{
+		"OnCase01" "sym_ad_stalemate,Trigger,,0,-1"
+		"OnCase02" "sym_ad_stalemate,Trigger,,0,-1"
+		"OnCase03" "sym_ad_red_win,Trigger,,0,-1"
+		"OnCase04" "sym_ad_red_win,Trigger,,0,-1"
+		"OnCase05" "sym_ad_blu_win,Trigger,,0,-1"
+		"OnCase06" "sym_ad_blu_win,Trigger,,0,-1"
+	}
+	"origin" "0 -32 -32"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1500]"
+	}
+}
+entity
+{
+	"id" "8"
+	"classname" "team_control_point_master"
+	"caplayout" "0 1 4 2 3"
+	"cpm_restrict_team_cap_win" "1"
+	"custom_position_x" "-1"
+	"custom_position_y" "-1"
+	"score_style" "1"
+	"targetname" "sym_ad_controller"
+	"team_base_icon_2" "sprites/obj_icons/icon_base_red"
+	"team_base_icon_3" "sprites/obj_icons/icon_base_blu"
+	"origin" "0 0 -16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "10"
+	"classname" "team_round_timer"
+	"auto_countdown" "1"
+	"max_length" "$TimerMax"
+	"reset_time" "0"
+	"setup_length" "0"
+	"show_in_hud" "1"
+	"show_time_remaining" "1"
+	"start_paused" "0"
+	"targetname" "sym_ad_timer"
+	"timer_length" "$TimerStart"
+	connections
+	{
+		"OnFinished" "sym_ad_outcome_counter,Add,10000,0,-1"
+		"On1SecRemain" "sym_ad_time_set_in_interval,Compare,,1,-1"
+		"On1SecRemain" "sym_ad_time_set_in_interval,SetValue,0,0,-1"
+	}
+	"origin" "0 32 -16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 5000]"
+	}
+}
+entity
+{
+	"id" "42"
+	"classname" "func_instance_parms"
+	"parm1" "$TimerMax integer"
+	"parm2" "$TimerStart integer"
+	"parm3" "$CaptureTime integer"
+	"origin" "0 0 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "206"
+	"classname" "logic_relay"
+	"spawnflags" "0"
+	"targetname" "sym_ad_lock_points"
+	connections
+	{
+		"OnTrigger" "sym_ad_blu_final_point,SetLocked,1,0,-1"
+		"OnTrigger" "sym_ad_blu_mid_point,SetLocked,1,0,-1"
+		"OnTrigger" "sym_ad_red_mid_point,SetLocked,1,0,-1"
+		"OnTrigger" "sym_ad_red_final_point,SetLocked,1,0,-1"
+	}
+	"origin" "0 0 -32"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "260"
+	"classname" "logic_relay"
+	"spawnflags" "0"
+	"targetname" "sym_ad_blu_win"
+	connections
+	{
+		"OnTrigger" "sym_ad_lock_points,Trigger,,0,-1"
+		"OnTrigger" "sym_ad_controller,SetWinner,3,0,-1"
+	}
+	"origin" "0 0 -48"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "666"
+	"classname" "logic_relay"
+	"spawnflags" "0"
+	"targetname" "sym_ad_red_win"
+	connections
+	{
+		"OnTrigger" "sym_ad_lock_points,Trigger,,0,-1"
+		"OnTrigger" "sym_ad_controller,SetWinner,2,0,-1"
+	}
+	"origin" "0 0 -64"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "670"
+	"classname" "logic_relay"
+	"spawnflags" "0"
+	"targetname" "sym_ad_stalemate"
+	connections
+	{
+		"OnTrigger" "sym_ad_lock_points,Trigger,,0,-1"
+		"OnTrigger" "sym_ad_controller,SetWinner,0,0,-1"
+	}
+	"origin" "0 0 -80"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1211"
+	"classname" "logic_compare"
+	"CompareValue" "1"
+	"targetname" "sym_ad_time_set_in_interval"
+	connections
+	{
+		"OnNotEqualTo" "sym_ad_outcome_counter,Add,10000,0,-1"
+	}
+	"origin" "0 32 -48"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1526"
+	"classname" "logic_compare"
+	"CompareValue" "9999"
+	"targetname" "sym_ad_cancel_overtime_outcome"
+	connections
+	{
+		"OnGreaterThan" "sym_ad_outcome_counter,Subtract,10000,0,-1"
+	}
+	"origin" "0 -32 -48"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+cameras
+{
+	"activecamera" "-1"
+}
+cordon
+{
+	"mins" "(-1024 -1024 -1024)"
+	"maxs" "(1024 1024 1024)"
+	"active" "0"
+}
